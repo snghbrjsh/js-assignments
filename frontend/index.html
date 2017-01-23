@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whatte Car!</title>
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
+
+</head>
+<link rel="stylesheet" href="./css/base.css" type="text/css" media="all" />
+<body>
+<div class="container">
+    <header>
+        <h1>Welcome to Cars!</h1>
+        <h3>The Catalogue</h3>
+    </header>
+    <section>
+
+        <div class="carousel-container">
+            <div class="carousel-left">
+                <a href="#" id="link-carousel-left"> <img src="./images/left-arrow.png" /> </a>
+            </div>
+            <div class="carousel-img">
+                <img src="" />
+            </div>
+            <div class="carousel-section">
+                <div>
+                    <span class="span-head">Manufacturer</span>
+                    <span class="span-value"></span>
+                </div>
+                <div>
+                    <span class="span-head">Model</span>
+                    <span class="span-value"></span>
+                </div>
+                <div>
+                    <span class="span-head">Price</span>
+                    <span class="span-value"></span>
+                </div>
+            </div>
+            <div class="carousel-right">
+                <a href="#" id="link-carousel-right"> <img src="./images/right-arrow.png" /> </a>
+            </div>
+
+        </div>
+
+        <div class="all-data">
+            <h3>All Data</h3>
+            <table id="cars-table">
+                <thead>
+                    <tr>
+                        <td>
+                            Image
+                        </td>
+                        <td>
+                            Manufacturer
+                        </td>
+                        <td>
+                            Model
+                        </td>
+                        <td>
+                            Price
+                        </td>
+                        <td>
+                            Wiki
+                        </td>
+                        <td>
+                            Add/Remove Car
+                        </td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+                <tfoot>
+                    <td>
+                        <a href="#" id="link-add-car">Add New Car</a>
+                    </td>
+                    <td>
+                        <a href="#" id="link-remove-all">Remove All</a>
+                    </td>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+    <footer>
+        For development purpose only!
+    </footer>
+</div>
+</body>
+<script src="./js/index.js"></script>
+</html>

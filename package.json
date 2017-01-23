@@ -1,0 +1,22 @@
+{
+  "name": "js-assignments",
+  "version": "0.1.0",
+  "description": "Sample node application for understanding JavaScript concepts",
+  "main": "./backend/app.js",
+  "dependencies": {
+    "express": "3.x",
+    "mongodb": "^2.2.21",
+    "mongoose": "^4.7.7"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./backend/app.js"
+  },
+  "keywords": [
+    "HTML5",
+    "JavaScript",
+    "Advanced"
+  ],
+  "author": "naveen upbeat",
+  "license": "ISC"
+}
