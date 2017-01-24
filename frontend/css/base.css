@@ -1,20 +1,67 @@
+body{
+    width:100%;
+    background-color:#ddd;
+}
+div.container{
+    position:relative;
+    margin:auto;
+    width:50%;
+    border: 1px solid #000;
+    background-color:#fff;
+}
 header{
     border-bottom: 5px solid black;
 }
+
+div.section-container{
+    min-height:600px;
+    height:100%;
+}
 div.carousel-container{
     margin-top:20px;
+    width:100%;
+    overflow: hidden;
 }
 
-div.carousel-container > div{
-    float:left;
+.carousel-container{
+    border-bottom: 4px solid #000;
+}
+
+.carousel-container .carousel-img{
+    position: relative;
+    width: 100%;
+    float: left;
+}
+.carousel-container .carousel-img img{
+    height: 100%;
+    width: 100%;
 }
 
 div.carousel-container .carousel-left{
-    float:left;
+    position: absolute;
+    padding-top:48px;
+    padding-bottom:48px;
+    z-index:2;
+    background-color:rgba(0,0,0,0.2);
+}
+
+div.carousel-section{
+    position:absolute;
+    margin-top:145px;
+    margin-left:30%;
+    width:40%;
+    color: #000;
+    background-color:rgba(255,255,255,0.7);
+
+    text-align: center;
 }
 
 div.carousel-container .carousel-right{
-    float:right;
+    position: absolute;
+    padding-top:48px;
+    padding-bottom:48px;
+    right:0px;
+    background-color:rgba(0,0,0,0.2);
   }
 div.carousel-container .carousel-left img, div.carousel-container .carousel-right img{
     height: 102px;
@@ -35,6 +82,28 @@ div.carousel-container .carousel-left img, div.carousel-container .carousel-righ
 #cars-table{
    border:3px solid black;
 }
+
+#section-add-car.hidden{
+    display: none;
+}
+
+#section-add-car.show{
+    display:block;
+}
+
+#section-add-car input, #section-add-car button{
+    width: 98.6%;
+}
+
+thead tr{
+    background-color: rgba(0,0,0,0.8);
+    color:#fff;
+}
+
+table{
+    width: 100%;
+}
+
 thead tr td, tfoot tr td{
     font-weight: bold;
 }
@@ -43,10 +112,16 @@ thead tr td, tfoot tr td, tr td{
     border: 1px dotted black;
 }
 
-
+header{
+    background: #000;
+    color: #fff;
+    margin-top: 0px;
+    padding-top:1px;
+    padding-left:8px;
+}
 
 footer{
-    position: fixed;
+    position:relative;
     bottom: 0;
     background: black;
     color: white;
@@ -55,3 +130,4 @@ footer{
     text-align: center;
     padding-top:2%;
 }
+

@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Whatte Car!</title>
+    <title>Hands On JavaScript!</title>
     <link rel="icon" type="image/png" href="./images/favicon.png" />
-
 </head>
 <link rel="stylesheet" href="./css/base.css" type="text/css" media="all" />
 <body>
 <div class="container">
     <header>
-        <h1>Welcome to Cars!</h1>
-        <h3>The Catalogue</h3>
+        <h1>JS Assignments - Series 1</h1>
+        <h3>The Cars</h3>
     </header>
-    <section>
-
+    <div class="section-container">
+    <section id="section-main">
+        <h2> Carousel</h2>
         <div class="carousel-container">
             <div class="carousel-left">
-                <a href="#" id="link-carousel-left"> <img src="./images/left-arrow.png" /> </a>
+                <a href="#" id="link-carousel-left"> <img src="./images/left-arrow-png.png" /> </a>
             </div>
             <div class="carousel-img">
                 <img src="" />
@@ -37,13 +37,13 @@
                 </div>
             </div>
             <div class="carousel-right">
-                <a href="#" id="link-carousel-right"> <img src="./images/right-arrow.png" /> </a>
+                <a href="#" id="link-carousel-right"> <img src="./images/right-arrow-png.png" /> </a>
             </div>
 
         </div>
 
         <div class="all-data">
-            <h3>All Data</h3>
+            <h2>Table</h2>
             <table id="cars-table">
                 <thead>
                     <tr>
@@ -63,7 +63,7 @@
                             Wiki
                         </td>
                         <td>
-                            Add/Remove Car
+                            Action
                         </td>
                     </tr>
                 </thead>
@@ -81,6 +81,79 @@
             </table>
         </div>
     </section>
+    <section id="section-add-car" class="hidden">
+        <form id="form-new-car" enctype="application/x-www-form-urlencoded">
+           <table>
+               <thead>
+                <tr>
+                    <td colspan="2">
+                        Add a New Car!
+                    </td>
+                </tr>
+               </thead>
+               <tr>
+                   <td>
+                       <label>Car Image</label>
+                   </td>
+                   <td>
+                       <input type="file" name="img" />
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <label>Car Manufacturer</label>
+                   </td>
+                   <td>
+                       <input type="text" name="manufacturer" id="car-manf"/>
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <label>
+                           Model
+                       </label>
+                   </td>
+                   <td>
+                       <input type="text" name="model" id="car-model" />
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <label>
+                           Price
+                       </label>
+                   </td>
+                   <td>
+                       <input type="text" name="price" />
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <label>
+                           Wiki
+                       </label>
+                   </td>
+                   <td>
+                       <input type="text" name="wiki" />
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <input type="hidden" name="carid" id="hidden-carid" />
+                   </td>
+               </tr>
+               <tr>
+                   <td>
+                       <button name="add-car" id="btn-add-car" >Add Car</button>
+                   </td>
+                   <td>
+                       <input type="reset" name="reset-details" text="Reset" />
+                   </td>
+               </tr>
+            </table>
+        </form>
+    </section>
+</div>
     <footer>
         For development purpose only!
     </footer>
