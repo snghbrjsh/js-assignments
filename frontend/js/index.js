@@ -213,4 +213,9 @@ function initCarousel(){
 
 }
 
+function hideAddCar(){
+    document.getElementById("section-add-car").style.display = "none";
+    document.getElementById("section-main").style.display = "block";
+}
+
 initCarousel().init();
