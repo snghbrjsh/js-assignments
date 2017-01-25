@@ -71,10 +71,10 @@
 
                 </tbody>
                 <tfoot>
-                    <td>
+                    <td colspan="3">
                         <a href="#" id="link-add-car">Add New Car</a>
                     </td>
-                    <td>
+                    <td colspan="3">
                         <a href="#" id="link-remove-all">Remove All</a>
                     </td>
                 </tfoot>
@@ -139,7 +139,7 @@
                </tr>
                <tr>
                    <td>
-                       <input type="hidden" name="carid" id="hidden-carid" />
+                       <input type="hidden" name="carid" id="hidden-carid" style="display:none;"/>
                    </td>
                </tr>
                <tr>
@@ -152,6 +152,7 @@
                </tr>
             </table>
         </form>
+        <a href="#" onclick="hideAddCar()"><<-- Go Back</a>
     </section>
 </div>
     <footer>
