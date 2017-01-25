@@ -83,6 +83,14 @@ div.carousel-container .carousel-left img, div.carousel-container .carousel-righ
    border:3px solid black;
 }
 
+#cars-table img{
+    width:100%;
+}
+
+#table-body td{
+    width:20%;
+}
+
 #section-add-car.hidden{
     display: none;
 }
