@@ -154,7 +154,8 @@ exports.addCar = function(req,res) {
 
 
 exports.removeCar = function(req,res){
-    if(req.carid){
+    console.log(req.body);
+    if(req.body.carid){
         db.collection('cars').removeOne({carid:req.body.carid},function(err,result){
            if (err) throw err;
 

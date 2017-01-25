@@ -24,8 +24,10 @@ function makeAjaxCall(url,respondFn,type,data){
         reqType = "GET";
     }else{
         reqType = type.toUpperCase();
+        //Send the proper header information along with the request
     }
     xhttp.open(reqType, url, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     postData = data || {};
     xhttp.send(postData);
 }
@@ -183,7 +185,7 @@ function initCarousel(){
             newAnchor.addEventListener("click",function(evt){
                 makeAjaxCall("/api/removecar",function(data){
                     removeCarFromTable(evt.target.carid);
-                },"POST",{carid:evt.target.carid});
+                },"POST","carid="+evt.target.carid);
             });
             newAnchor.href="#";
             newTd6.appendChild(newAnchor);
