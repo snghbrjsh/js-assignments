@@ -11,39 +11,27 @@
  *  Write TestCases using Jasmine
  *
  * */
-function makeAjaxCall(url,respondFn,type,data){
 
-    var xhttp = new XMLHttpRequest(), reqType, postData;
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            respondFn(JSON.parse(this.responseText));
-            //document.getElementById("demo").innerHTML = this.responseText;
-        }
-    };
-    if(!type){
-        reqType = "GET";
-    }else{
-        reqType = type.toUpperCase();
-        //Send the proper header information along with the request
-    }
-    xhttp.open(reqType, url, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    postData = data || {};
-    xhttp.send(postData);
-}
+
 
 function initCarousel(){
     var getCarsUrl = "/api/getcars";
     var allCars = [], currentCarid="";
 
+    var carEventsManager = new myApp.EventManager();
+    carEventsManager.subscribe('remove', removeCarFromTable);
+    carEventsManager.subscribe('remove', noop);
+
     function init(){
-        makeAjaxCall(getCarsUrl,function(data){
+        var p = getPromise(getCarsUrl, 'GET');
+        p.then(function(data){
             allCars=data;
             if(allCars.length){
-                updateCarousel(allCars[0]["carid"]);
+                updateCarousel(allCars[0]["_id"]);
             }
             populateTable(allCars);
         });
+
         var linkCarouselLeft = document.getElementById("link-carousel-left");
         var linkCarouselRight = document.getElementById("link-carousel-right");
         linkCarouselLeft.addEventListener("click",function(){
@@ -69,18 +57,18 @@ function initCarousel(){
             if(blnRemoveConfirm){
 
               for(var k=allCars.length-1; k>=0; k--){
-                    removeCarFromTable(allCars[k].carid);
+                  removeCar(allCars[k]._id);
                 }
             }
-
         });
 
         var btnAddCar = document.getElementById("btn-add-car");
         btnAddCar.addEventListener("click",function(){
             document.getElementById("hidden-carid").value = document.getElementById("car-manf").value.toString().substring(0,3).toUpperCase() + document.getElementById("car-model").value.toString().substring(0,3).toUpperCase();
             var formAddCar = document.getElementById("form-new-car"),
-                inputs = formAddCar.getElementsByTagName("input"),
-                formData = {}, urlAddCar = "/api/addcar";
+                // inputs = formAddCar.getElementsByTagName("input"),
+                // formData = {},
+                urlAddCar = "/api/addcar";
 
             var formData = new FormData(formAddCar);
 
@@ -90,49 +78,66 @@ function initCarousel(){
 
             //var formPostdata = JSON.stringify(formData);
 
-            makeAjaxCall(urlAddCar,function(data){
+            // makeAjaxCall(urlAddCar,function(data){
+            //     console.log("Added New Car",data);
+            // },"POST",formData);
+
+            var p = getPromise(urlAddCar, 'POST', formData);
+            p.then(function(data){
                 console.log("Added New Car",data);
-            },"POST",formData);
+            });
 
         });
 
     }
 
     function updateCarousel(carid){
-        var allCars2 = allCars;
+        // var allCars2 = allCars;
         currentCarid = carid;
-        if(carid){
-           var carouselImg = document.getElementsByClassName("carousel-img");
-           var carouselSec = document.getElementsByClassName("carousel-section");
-           if ( carouselImg && carouselImg.length){
-                var carouselImgElement = carouselImg[0].children[0];
-                for ( var j=0; j<allCars2.length; j++){
-                    if(allCars2[j].carid == carid){
-                        carouselImgElement.src = window.location.pathname +"images/cars/"+ allCars2[j].img;
-                        carouselSec[0].children[0].children[1].textContent= allCars2[j].manufacturer;
-                        carouselSec[0].children[1].children[1].textContent = allCars2[j].model;
-                        carouselSec[0].children[2].children[1].textContent= allCars2[j].price;
-                    }
-                }
-           }
+
+        var carouselImg = document.getElementsByClassName("carousel-img");
+        var carouselSec = document.getElementsByClassName("carousel-section");
+        if ( carouselImg && carouselImg.length){
+            var carouselImgElement = carouselImg[0].children[0];
+            var car = allCars.find(item => item._id === carid);
+            if(car) {
+                carouselImgElement.src = "images/cars/"+ car.img;
+                carouselSec[0].children[0].children[1].textContent= car.manufacturer;
+                carouselSec[0].children[1].children[1].textContent = car.model;
+                carouselSec[0].children[2].children[1].textContent= car.price;
+            } else {
+                carouselImgElement.src = "images/cars/no-image-available.jpg";
+                carouselSec[0].children[0].children[1].textContent= '';
+                carouselSec[0].children[1].children[1].textContent = '';
+                carouselSec[0].children[2].children[1].textContent= '';
+            }
+        }
+    }
+
+    function noop(removedCarId) {
+        if(allCars && allCars.length){
+            var removedCarIndex = allCars.findIndex( item => item._id === removedCarId);
+            (removedCarIndex === -1) ? updateCarousel(allCars[0]._id) : null;
+        } else {
+            updateCarousel(0);
         }
     }
 
     function moveCarousel(direction){
         if(currentCarid && allCars.length){
             for(var j=0;j<allCars.length;j++){
-                if(allCars[j].carid == currentCarid){
+                if(allCars[j]._id == currentCarid){
                     if(direction == 1){
                         if(j<allCars.length-1){
-                            updateCarousel(allCars[j+1].carid);
+                            updateCarousel(allCars[j+1]._id);
                         }else{
-                            updateCarousel(allCars[0].carid);
+                            updateCarousel(allCars[0]._id);
                         }
                     }else{
                         if(j>0){
-                            updateCarousel(allCars[j-1].carid);
+                            updateCarousel(allCars[j-1]._id);
                         }else{
-                            updateCarousel(allCars[allCars.length-1].carid);
+                            updateCarousel(allCars[allCars.length-1]._id);
                         }
                     }
                     break;
@@ -150,7 +155,7 @@ function initCarousel(){
             var newTd1 = document.createElement("td");
             newTr.appendChild(newTd1);
             var newImg = document.createElement("img");
-            newImg.src = location.protocol+"//"+location.hostname+":"+location.port+ location.pathname + "/images/cars/"+ result[i].img;
+            newImg.src = location.protocol+"//"+location.hostname + ":" + location.port + "/images/cars/" + result[i].img;
             newTd1.appendChild(newImg);
 
             var newTd2 = document.createElement("td");
@@ -181,25 +186,41 @@ function initCarousel(){
             newTr.appendChild(newTd6);
             var newAnchor = document.createElement("a");
             newAnchor.textContent = "Remove";
-            newAnchor.carid = result[i].carid;
+            newAnchor.carid = result[i]._id;
             newAnchor.addEventListener("click",function(evt){
-                makeAjaxCall("/api/removecar",function(data){
-                    removeCarFromTable(evt.target.carid);
-                },"POST","carid="+evt.target.carid);
+                var p = getPromise('/api/removecar', 'POST', 'carid='+evt.target.carid);
+                p.then(function(data){
+                    removeCar(evt.target.carid);
+                });
+                // makeAjaxCall("/api/removecar",function(data){
+                //     removeCarFromTable(evt.target.carid);
+                // },"POST","carid="+evt.target.carid);
             });
             newAnchor.href="#";
             newTd6.appendChild(newAnchor);
         }
     }
 
-    function removeCarFromTable(carid){
+    function removeCar(carid) {
         if(carid){
             for(var k=allCars.length-1; k>=0; k--){
-                if(allCars[k].carid == carid){
+                if(allCars[k]._id == carid){
                     allCars.splice(k,1);
+                    carEventsManager.notifySubscribers('remove', carid);
                     break;
                 }
             }
+        }
+    }
+
+    function removeCarFromTable(carid){
+        if(carid){
+            // for(var k=allCars.length-1; k>=0; k--){
+            //     if(allCars[k]._id == carid){
+            //         allCars.splice(k,1);
+            //         break;
+            //     }
+            // }
             var tbody = document.getElementById('table-body');
             while (tbody.firstChild) {
                 tbody.removeChild(tbody.firstChild);
@@ -210,7 +231,6 @@ function initCarousel(){
 
     return {
         init: init
-
     };
 
 }

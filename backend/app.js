@@ -18,19 +18,19 @@ app.configure(function() {
     app.use(express.cookieParser());
     app.use(express.static('static'));
     app.use(express.static(path.join(__dirname, '../frontend')));
+    app.use(express.static(path.join(__dirname, '../test')));
 });
 
 app.set('port', process.env.PORT || 3000);
 
 //routes
+app.get('/home', routes.index);
+app.get('/spec',routes.spec);
 app.get('/api/populatedata',routes.populateData);
 app.get('/api/cleardata',routes.clearData);
 app.get('/api/getcars', routes.getCars);
 app.post('/api/addcar',routes.addCar);
 app.post('/api/removecar',routes.removeCar);
-app.get('*', routes.index);
-
-
 
 //have our app listen on port 3000
 app.listen(3000);
