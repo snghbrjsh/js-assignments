@@ -1,8 +1,9 @@
 Just a test file for git commands illustration.
-
 May add one or two line for further testing
 
 line added for another commit.
 
-
 this line is committed from server.
+
+ -- new commit - 03
+
