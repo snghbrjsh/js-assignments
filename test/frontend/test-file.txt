@@ -18,4 +18,8 @@ test commit illustration - 03
 test commit 04
 
  -- commit 05 -- on master.
+
 illustration commit 05
+
+new commit for test purpose.
+commit-04
