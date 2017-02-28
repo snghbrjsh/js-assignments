@@ -5,11 +5,11 @@ line added for another commit.
 
 feature  branch changes.
 
-this line is committed from server.
 
 this line is committed from server.
 
  -- new commit - 03
+
 
 test commit illustration - 03
 
@@ -23,3 +23,12 @@ illustration commit 05
 
 new commit for test purpose.
 commit-04
+
+ -- Commit 04
+
+
+ -- commit 05 -- on master.
+
+
+new commit for test purpose.
+
