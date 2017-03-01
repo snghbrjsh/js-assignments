@@ -3,9 +3,15 @@ May add one or two line for further testing
 
 line added for another commit.
 
+feature  branch changes.
+
+
 this line is committed from server.
 
  -- new commit - 03
+
+
+test commit illustration - 03
 
  -- Commit 04
 
@@ -16,3 +22,21 @@ this line is committed from server.
 
 
 another change
+
+test commit 04
+
+ -- commit 05 -- on master.
+
+illustration commit 05
+
+new commit for test purpose.
+commit-04
+
+ -- Commit 04
+
+
+ -- commit 05 -- on master.
+
+
+new commit for test purpose.
+
